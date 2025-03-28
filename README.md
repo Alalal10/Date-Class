@@ -1,4 +1,7 @@
-# Date-Class
+Date-Class
+
+This is the class that describes the date. It has a year, a month, and a day. It checks if the date is correct, gets the day of the week for that date, updates the date if necessary, and calculates the difference between the two dates.
+
     import java.time.*;
     import java.time.format.TextStyle;
     import java.time.temporal.ChronoUnit;
@@ -6,6 +9,8 @@
 
     class Date implements Comparable<Date> {
       private int year, month, day;
+      
+We pass on the year, month and day. This code checks if the date is correct (for example, January 32 is incorrect). If the date is correct, it is saved; if not, an error is discarded.
 
     public Date(int year, int month, int day) {
         if (isValidDate(year, month, day)) {
@@ -34,17 +39,20 @@
             System.out.println("Error: Invalid date update attempt!");
         }
     }
+This method shows the day of the week for a given date.
 
     public String getDayOfWeek() {
         LocalDate date = LocalDate.of(year, month, day);
         return date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
     }
+This method counts how many days have passed between two dates.
 
     public static long dateDifference(Date d1, Date d2) {
         LocalDate date1 = LocalDate.of(d1.year, d1.month, d1.day);
         LocalDate date2 = LocalDate.of(d2.year, d2.month, d2.day);
         return Math.abs(ChronoUnit.DAYS.between(date1, date2));
     }
+This method allows you to compare two dates. For example, if we want to know which date comes first, we can use this method for sorting.
 
     @Override
     public int compareTo(Date other) {
@@ -61,20 +69,7 @@
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Nexy part of code is that the programme starts by asking the user for the number of dates they want to enter. After that, in the cycle, the programme asks you to enter a day, month, and year for each date. The entered data is added to the dateList.
 
     import java.util.*;
 
@@ -99,6 +94,7 @@
                 i--;
             }
         }
+After entering the dates, the programme prompts the user to select two dates from the list and calculate the difference between them in days. After calculating the difference, the programme asks if the user wants to continue comparing other dates.
 
         String continueComparing = "yes";
         while (continueComparing.equalsIgnoreCase("yes") && dateList.size() > 1) {
@@ -117,6 +113,7 @@
             System.out.print("Do you want to compare the difference between other dates? (yes/no): ");
             continueComparing = scanner.next();
         }
+Here, the programme offers the user the option to update the date from the list. The user selects the date that needs to be updated and enters a new one. The programme updates the date in the list and shows it.
 
         String continueUpdating = "yes";
         while (continueUpdating.equalsIgnoreCase("yes")) {
@@ -140,6 +137,7 @@
             System.out.print("Do you want to update another date? (yes/no): ");
             continueUpdating = scanner.next();
         }
+After the user has completed all the updates and comparisons, the programme sorts the list of dates in ascending order and displays them.
 
         Collections.sort(dateList);
         System.out.println("Sorted dates:");
